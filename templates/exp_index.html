@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>正交实验</title>
+
+    <link type="text/css" rel="stylesheet" href="../static/layui-v2.5.7/layui/css/layui.css">
+
+    <style>
+        #jz {
+            position: fixed;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="jz">
+    <button type="button" class="layui-btn layui-btn-radius" id="test6">
+    <i class="layui-icon"></i>上传Excel文件
+    </button>
+
+    <i href="#" class="layui-icon layui-icon-more-vertical"></i>
+
+    <a href="/show" class="layui-btn layui-btn-disabled layui-btn-radius" id="test7">查看结果</a>
+
+    <div id="show_file" style="margin-top: 5px; text-align: center"></div>
+</div>
+
+
+</body>
+
+<script src="../static/layui-v2.5.7/layui/layui.js"></script>
+<script src="../static/js/jquery.min.js?v=2.1.4"></script>
+
+<script>
+    layui.use('upload', function () {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        upload.render({ //允许上传的文件后缀
+            elem: '#test6'
+            , url: '/upload' //改成您自己的上传接口
+            , accept: 'file' //普通文件
+            , exts: 'xlsx|xls' //只允许上传excel文件
+            , done: function (res) {
+
+                console.log(res)
+                if (res.code === 0){
+                    layer.msg(res.msg, {icon: 6});
+                    $('#test7').removeClass().addClass('layui-btn')
+                    // $('#jz').append('<h4>已上传文件: ' + res.data['filename'] + '</h4>')
+                    $('#show_file').text('已上传文件: ' + res.data['filename'])
+                }
+                else {
+                    layer.msg(res.msg, {icon: '&#xe69c'});
+                }
+            }
+        });
+
+    });
+</script>
+
+</html>

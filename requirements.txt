@@ -1,0 +1,3 @@
+Flask==1.1.2
+Flask-Session==0.3.2
+openpyxl==3.0.7
