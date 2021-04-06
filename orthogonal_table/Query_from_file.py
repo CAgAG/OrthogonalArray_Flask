@@ -10,12 +10,12 @@ class QueryTable:
             while True:
                 if index == length:
                     break
-                txt = all_lines[index]
-                if '\n' == txt:
+                file_list = all_lines[index]
+                if '\n' == file_list:
                     index += 1
                     continue
-                if '^' in txt:
-                    mk, n = txt.strip().split('     ')
+                if '^' in file_list:
+                    mk, n = file_list.strip().split('     ')
                     all_table[mk] = []
                     for _ in range(int(n.replace('n=', ''))):
                         index += 1
@@ -101,9 +101,9 @@ class QueryTable:
         """
         gen_key = self.gen_query(data)
         query_key = self.get_query_key(gen_key)
+        print('query_key: ', query_key)
         if query_key is None:
             return None
-
         ret = []
         data = self.reshape_data(query_key, data)
 
